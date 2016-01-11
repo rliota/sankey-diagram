@@ -21,9 +21,9 @@
         #chart{
             height: 100%;
             width: 100%;
+            font-family: "Helvetic Neue", Helvetica, Arial, sans-serif;
+            font-size: 12px;
         }
-
-
 
         .node rect {
             cursor: move;
@@ -36,15 +36,19 @@
             text-shadow: 0 1px 0 #fff;
         }
 
+        .node.active{
+            font-weight: bold;
+        }
+
+        .node.active rect{
+            fill-opacity: .7;
+        }
+
         .link {
             fill: none;
             stroke: #000;
             stroke-opacity: .2;
         }
-
-        /*.link:hover {
-            stroke-opacity: .5;
-        }*/
 
         .link.active{
             stroke: #9adaa6;
@@ -111,6 +115,7 @@
                     .data(energy.nodes)
                     .enter().append("g")
                     .attr("class", "node")
+                    .attr('data-name', function(d){ return d.name})
                     .attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; })
                     .call(d3.behavior.drag()
                         .origin(function(d) { return d; })
@@ -125,7 +130,7 @@
                     .attr("height", function(d) { return d.dy; })
                     .attr("width", sankey.nodeWidth())
                     .style("fill", function(d) { return d.color = color(d.name.replace(/ .*/, "")); })
-                    .style("stroke", function(d) { return d3.rgb(d.color).darker(2); })
+                    //.style("stroke", function(d) { return d3.rgb(d.color).darker(2); })
                     .append("title")
                     .text(function(d) { return d.name + "\n" + format(d.value); });
 
