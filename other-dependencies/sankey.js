@@ -1,3 +1,5 @@
+// see https://github.com/d3/d3-plugins/tree/master/sankey for licensing details
+
 d3.sankey = function() {
     var sankey = {},
         nodeWidth = 24,
